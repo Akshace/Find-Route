@@ -72,26 +72,30 @@ def search(house_map):
                  house_map[row_i][col_i] == "p"][0]
     fringe = [(pichu_loc, 0)]
     travel=""
+    traversed=[]
 
 
     while fringe:
         (curr_move, curr_dist) = fringe.pop()
+        traversed.append(curr_move)
+        print(traversed)
+        print(curr_dist)
+        print(fringe)
         for move in moves(house_map, *curr_move):
             # IMP--if house_map[move[0]][move[1]] == "@":
             # print(move[0],move[1])
             # print(type(house_map))
             ##print(check)
-
-            print(curr_move[0])
-            print(move[0])
-            if move[0]-curr_move[0]==-1:
+            # print(curr_move[0])
+            # print(move[0])
+            if move[0]-curr_move[0]==-1 and len(fringe)<=1:
                  travel=travel + "U"
-            if move[0]-curr_move[0]==1:
+            if move[0]-curr_move[0]==1 and len(fringe)<=1:
                  travel=travel + "D"
-            if move[1]-curr_move[1]==1:
+            if move[1]-curr_move[1]==1 and len(fringe)<=1:
                  travel=travel + "R"
             if str(house_map[move[0]][move[1]]) == "@":
-                return (curr_dist, travel)  # return a dummy answer
+                return (curr_dist + 1, travel)  # return a dummy answer
             else:
                 fringe.append((move, curr_dist + 1))
 
