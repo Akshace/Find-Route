@@ -92,7 +92,7 @@ def search(house_map):
             path = path_for_pop_move + str(add_direction(curr_move, move))
             print(path)
             if str(house_map[move[0]][move[1]]) == "@":
-                return curr_dist + 1, path  # return a dummy answer
+                return (curr_dist + 1, path)  # return a dummy answer
             else:
                 fringe.append((move, curr_dist + 1, path))
 
