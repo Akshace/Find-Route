@@ -70,6 +70,8 @@ def add_direction(pre, nxt):
         return "R"
     if nxt[1] - pre[1] == 1:
         return "L"
+    else:
+        return ""
 
 
 def search(house_map):
