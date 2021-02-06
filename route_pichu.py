@@ -95,7 +95,6 @@ def search(house_map):
                 return (curr_dist + 1, path)  # return a dummy answer
             else:
                 fringe.append((move, curr_dist + 1, path))
-    return (-1, "")
 
 
 # Main Function
