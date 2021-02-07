@@ -32,10 +32,10 @@ def valid_index(pos, n, m):
 
 
 # Find the possible moves from position (row, col)
-check = []
 
 
-def moves(map, row, col):
+
+def moves(map, row, col, check):
     check.append((row, col))
     moves = ((row + 1, col), (row - 1, col), (row, col - 1), (row, col + 1))
 
@@ -78,7 +78,7 @@ def search(house_map):
     # Find pichu start position
     pichu_loc = [(row_i, col_i) for col_i in range(len(house_map[0])) for row_i in range(len(house_map)) if
                  house_map[row_i][col_i] == "p"][0]
-
+    check = []
     #IMp-- fringe = [(pichu_loc, 0)]
     travel = ""
     fringe = [(pichu_loc, 0, travel)]
@@ -89,7 +89,7 @@ def search(house_map):
         # traversed.append(curr_move)
         # print(traversed)
         path_for_pop_move = path
-        for move in moves(house_map, *curr_move):
+        for move in moves(house_map, *curr_move, check):
 
             path = path_for_pop_move + str(add_direction(curr_move, move))
             print(path)
