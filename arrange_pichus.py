@@ -29,12 +29,26 @@ def printable_board(board):
 
 # Add a pichu to the board at the given position, and return a new board (doesn't change original)
 def add_pichu(board, row, col):
+    # a = board[0: row]
+    # b = board[row][0:col]
+    # c = ['p', ]
+    # d = board[row][col + 1:]
+    # e = board[row + 1:]
+    # return a + [b + c + d] + e
+    # board[row][col] = 'p'
+    # return board
     return board[0:row] + [board[row][0:col] + ['p', ] + board[row][col + 1:]] + board[row + 1:]
 
 
 # Get list of successors of given board state
 def successors(board):
-    return [add_pichu(board, r, c) for r in range(0, len(board)) for c in range(0, len(board[0])) if board[r][c] == '.']
+    pichu_loc = [(row_i, col_i) for col_i in range(len(board[0])) for row_i in range(len(board)) if
+                 board[row_i][col_i] == "p"][0]
+    #  for r in range(0, len(board)):
+    # #     for c in range(0, len(board[0])):
+    # #         if board[r][c] == '.':
+    # #             return [add_pichu(board, r, c)]
+    return [add_pichu(board, r, c) for r in range(0, pichu_loc[0]) for c in range(pichu_loc[1]+1, len(board[0])) if board[r][c] == '.' ]
 
 
 # check if board is a goal state
@@ -53,6 +67,7 @@ def solve(initial_board, k):
     fringe = [initial_board]
     while len(fringe) > 0:
         for s in successors(fringe.pop()):
+            print(s)
             if is_goal(s, k):
                 return (s, True)
             fringe.append(s)
