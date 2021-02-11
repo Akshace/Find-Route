@@ -50,11 +50,10 @@ def add_pichu(board, row, col, check_board):
 def successors(board, check_board):
     pichu_count = count_pichus(board)
     print(pichu_count)
-    if pichu_count < k:
-        for r in range(0, len(board)):
-            for c in range(0, len(board[0])):
-                if board[r][c] == '.' and check_board[r][c] != 0:
-                    return [add_pichu(board, r, c, check_board)]
+    for r in range(0, len(board)):
+        for c in range(0, len(board[0])):
+            if board[r][c] == '.' and check_board[r][c] != 0:
+                return [add_pichu(board, r, c, check_board)]
 
     # return [add_pichu(board, r, c) for r in range(0, pichu_loc[0]) for c in range(pichu_loc[1]+1, len(board[0])) if board[r][c] == '.' ]
 
