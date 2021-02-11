@@ -27,28 +27,39 @@ def printable_board(board):
     return "\n".join(["".join(row) for row in board])
 
 
+def create_flag_board(board):
+    flag = []
+    for i in range(0, len(board)):
+        temp = []
+        for j in range(0, len(board[0])):
+            temp.append(1)
+        flag.append(temp)
+    return flag
+
+
 # Add a pichu to the board at the given position, and return a new board (doesn't change original)
-def add_pichu(board, row, col):
-    # a = board[0: row]
-    # b = board[row][0:col]
-    # c = ['p', ]
-    # d = board[row][col + 1:]
-    # e = board[row + 1:]
-    # return a + [b + c + d] + e
-    # board[row][col] = 'p'
-    # return board
-    return board[0:row] + [board[row][0:col] + ['p', ] + board[row][col + 1:]] + board[row + 1:]
+def add_pichu(board, row, col, check_board):
+    f1 = check_rows(board, row, col, check_board)
+    updated_board = check_col(board, row, col, f1)
+    y = board[0:row] + [board[row][0:col] + ['p', ] + board[row][col + 1:]] + board[row + 1:]
+    # return board[0:row] + [board[row][0:col] + ['p', ] + board[row][col + 1:]] + board[row + 1:]
+    return y, updated_board
 
 
 # Get list of successors of given board state
-def successors(board):
-    pichu_loc = [(row_i, col_i) for col_i in range(len(board[0])) for row_i in range(len(board)) if
-                 board[row_i][col_i] == "p"][0]
-    #  for r in range(0, len(board)):
-    # #     for c in range(0, len(board[0])):
-    # #         if board[r][c] == '.':
-    # #             return [add_pichu(board, r, c)]
-    return [add_pichu(board, r, c) for r in range(0, pichu_loc[0]) for c in range(pichu_loc[1]+1, len(board[0])) if board[r][c] == '.' ]
+def successors(board, check_board):
+    pichu_count = count_pichus(board)
+    print(pichu_count)
+    if pichu_count < k:
+        for r in range(0, len(board)):
+            for c in range(0, len(board[0])):
+                if board[r][c] == '.' and check_board[r][c] != 0:
+                    return [add_pichu(board, r, c, check_board)]
+
+    # return [add_pichu(board, r, c) for r in range(0, pichu_loc[0]) for c in range(pichu_loc[1]+1, len(board[0])) if board[r][c] == '.' ]
+
+
+# def check_R_C(board, r, c):
 
 
 # check if board is a goal state
@@ -64,17 +75,77 @@ def is_goal(board, k):
 # - success is True if a solution was found, and False otherwise.
 #
 def solve(initial_board, k):
-    fringe = [initial_board]
+    check_board = create_flag_board(initial_board)
+
+    pichu_loc = [(row_i, col_i) for col_i in range(len(initial_board[0])) for row_i in range(len(initial_board))
+                 if initial_board[row_i][col_i] == "p"][0]
+
+    a1 = check_rows(initial_board, pichu_loc[0], pichu_loc[1], check_board)
+    new_board = check_col(initial_board, pichu_loc[0], pichu_loc[1], a1)
+
+    fringe = [(initial_board, new_board)]
     while len(fringe) > 0:
-        for s in successors(fringe.pop()):
-            print(s)
-            if is_goal(s, k):
-                return (s, True)
-            fringe.append(s)
+        (pichu_board, flag_board) = fringe.pop()
+        iter = successors(pichu_board, flag_board)
+        # for s in successors(fringe.pop()):
+        if iter is None:
+            return ([], False)
+        s = iter[0][0]
+
+        if is_goal(s, k):
+            return (s, True)
+        fringe.append(iter[0])
     return ([], False)
 
 
-# Main Function
+def check_rows(board, row, column, flag):
+    print(type(board))
+    print(type(flag))
+    for i in range(column + 1, len(board[0])):
+        if board[row][i] == 'X':
+            flag[row][i] = 0
+            print(flag[row])
+            break
+        if board[row][i] == 'p':
+            flag[row][i] = 0
+            print(flag)
+            break
+        flag[row][i] = 0
+
+    for i in range(column - 1, -1, -1):
+        if board[row][i] == 'X':
+            flag[row][i] = 0
+            break
+        if board[row][i] == 'p':
+            flag[row][i] = 0
+            break
+        flag[row][i] = 0
+    print(flag)
+    return flag
+
+
+def check_col(board, row, column, flag):
+    for i in range(row - 1, -1, -1):
+        if board[i][column] == 'X':
+            flag[i][column] = 0
+            break
+        if board[i][column] == 'p':
+            flag[i][column] = 0
+            break
+        flag[i][column] = 0
+    for i in range(row, len(board)):
+        if board[i][column] == 'X':
+            flag[i][column] = 0
+            break
+        if board[i][column] == 'p':
+            flag[i][column] = 0
+            break
+        flag[i][column] = 0
+    print(flag)
+    return flag
+    # Main Function
+
+
 if __name__ == "__main__":
     house_map = parse_map(sys.argv[1])
 
