@@ -9,9 +9,10 @@ Approach:
 3. Initially, found that there was no check on visited states. Created check list in moves function for it and added
    it in if statement to avoid those positions while traversing.
 4. The search problem implements DFS as a stack is used.
-5. At a node, where there are multiple paths avaiable, the algorithm traverses through each path. If a path is blocked,
+5. It can be changed to queue implementation by using fringe.pop(0), and will act as BFS.
+6. At a node, where there are multiple paths avaiable, the algorithm traverses through each path. If a path is blocked,
    the stacks pops the elements until the diverging node is reached.
-6. Initial code provided was getting stuck once it traversed through a blocked path as there was no check for traversed states.
+7. Initial code provided was getting stuck once it traversed through a blocked path as there was no check for traversed states.
 
 
 Challenges faced:

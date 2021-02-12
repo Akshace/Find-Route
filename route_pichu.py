@@ -82,7 +82,7 @@ def search(house_map):
     traversed = []
 
     while fringe:
-        (curr_move, curr_dist, path) = fringe.pop()
+        (curr_move, curr_dist, path) = fringe.pop(0)
         path_for_pop_move = path
         for move in moves(house_map, *curr_move, check):   # *curr_move can receives multiple values
 
