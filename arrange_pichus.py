@@ -95,7 +95,7 @@ def check_rows(board, row, column, flag):
     print(type(board))
     print(type(flag))
     for i in range(column + 1, len(board[0])):
-        if board[row][i] == 'X':
+        if board[row][i] == 'X' or board[row][i] == '@':
             flag[row][i] = 0
             print(flag[row])
             break
@@ -106,7 +106,7 @@ def check_rows(board, row, column, flag):
         flag[row][i] = 0
 
     for i in range(column - 1, -1, -1):
-        if board[row][i] == 'X':
+        if board[row][i] == 'X' or board[row][i] == '@':
             flag[row][i] = 0
             break
         if board[row][i] == 'p':
@@ -119,7 +119,7 @@ def check_rows(board, row, column, flag):
 
 def check_col(board, row, column, flag):
     for i in range(row - 1, -1, -1):
-        if board[i][column] == 'X':
+        if board[i][column] == 'X' or board[i][column] == '@':
             flag[i][column] = 0
             break
         if board[i][column] == 'p':
@@ -127,7 +127,7 @@ def check_col(board, row, column, flag):
             break
         flag[i][column] = 0
     for i in range(row, len(board)):
-        if board[i][column] == 'X':
+        if board[i][column] == 'X' or board[i][column] == '@':
             flag[i][column] = 0
             break
         if board[i][column] == 'p':
