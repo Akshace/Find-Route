@@ -2,12 +2,10 @@
 #
 # arrange_pichus.py : arrange agents on a grid, avoiding conflicts
 #
-# Submitted by : [PUT YOUR NAME AND USERNAME HERE]
+# Submitted by : [AKSHAT ARVIND    aarvind]
 #
 # Based on skeleton code in CSCI B551, Spring 2021
 #
-
-
 import sys
 
 
@@ -27,6 +25,7 @@ def printable_board(board):
     return "\n".join(["".join(row) for row in board])
 
 
+# Create a Flag Board of 1's which will be updated after every placed pichus for available spots
 def create_flag_board(board):
     flag = []
     for i in range(0, len(board)):
@@ -37,7 +36,7 @@ def create_flag_board(board):
     return flag
 
 
-# Add a pichu to the board at the given position, and return a new board (doesn't change original)
+# Add a pichu to the board at the given position, and return a new board (doesn't change original) + Updated Flag Board
 def add_pichu(board, row, col, check_board):
     f1 = check_rows(board, row, col, check_board)
     updated_board = check_col(board, row, col, f1)
@@ -55,15 +54,10 @@ def successors(board, check_board):
             if board[r][c] == '.' and check_board[r][c] != 0:
                 return [add_pichu(board, r, c, check_board)]
 
-    # return [add_pichu(board, r, c) for r in range(0, pichu_loc[0]) for c in range(pichu_loc[1]+1, len(board[0])) if board[r][c] == '.' ]
-
-
-# def check_R_C(board, r, c):
-
 
 # check if board is a goal state
-def is_goal(board, k):
-    return count_pichus(board) == k
+def is_goal(board, count):
+    return count_pichus(board) == count
 
 
 # Arrange agents on the map
@@ -73,7 +67,7 @@ def is_goal(board, k):
 # - new_map is a new version of the map with k agents,
 # - success is True if a solution was found, and False otherwise.
 #
-def solve(initial_board, k):
+def solve(initial_board, input_pichus):
     check_board = create_flag_board(initial_board)
 
     pichu_loc = [(row_i, col_i) for col_i in range(len(initial_board[0])) for row_i in range(len(initial_board))
@@ -85,16 +79,16 @@ def solve(initial_board, k):
     fringe = [(initial_board, new_board)]
     while len(fringe) > 0:
         (pichu_board, flag_board) = fringe.pop()
-        iter = successors(pichu_board, flag_board)
+        next_board = successors(pichu_board, flag_board)
         # for s in successors(fringe.pop()):
-        if iter is None:
-            return ([], False)
-        s = iter[0][0]
+        if next_board is None:
+            return [], False
+        s = next_board[0][0]
 
-        if is_goal(s, k):
-            return (s, True)
-        fringe.append(iter[0])
-    return ([], False)
+        if is_goal(s, input_pichus):
+            return s, True
+        fringe.append(next_board[0])
+    return [], False
 
 
 def check_rows(board, row, column, flag):
