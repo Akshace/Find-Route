@@ -69,7 +69,7 @@ Ans - In add_pichus function, I used the row and column received from successors
 
 
 ##Citations
-This assignment is submitted by Akshat Arvind under the supervision of Prof. David Crandall and Course AIs - Zoher Kachwala and Team
+This assignment is submitted by Akshat Arvind under the supervision of Prof. David Crandall and Course AIs - Zoher Kachwala and Team.
 I have discussed the approach of the problem statement with my colleagues and flatmates Rahul Shamdasani and Aniket Kale.
 	  
 	  
