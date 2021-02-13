@@ -145,6 +145,10 @@ if __name__ == "__main__":
     # This is K, the number of agents
     k = int(sys.argv[2])
     print("Starting from initial board:\n" + printable_board(house_map) + "\n\nLooking for solution...\n")
+    if k == 1:
+        print("Here's what we found:")
+        print(printable_board(house_map))
+        sys.exit()
     (newboard, success) = solve(house_map, k)
     print("Here's what we found:")
     print(printable_board(newboard) if success else "None")
