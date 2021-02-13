@@ -64,3 +64,12 @@ Ans - In successors function, added a new argument as check_board which was this
 4. How to update flag board after placing pichus?
 Ans - In add_pichus function, I used the row and column received from successors function to feed it to my check_rows and check_col
 	  function to get the flag board updated.
+	  
+	  
+
+
+##Citations
+This assignment is submitted by Akshat Arvind under the supervision of Prof. David Crandall and Course AIs - Zoher Kachwala and Team
+I have discussed the approach of the problem statement with my colleagues and flatmates Rahul Shamdasani and Aniket Kale.
+	  
+	  
