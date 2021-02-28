@@ -1,0 +1,30 @@
+teamname,aarvind
+commit used,72d94d8ee6cac09ed93c64b3c399321bfe3db6b6
+commit date,2021-02-12 19:38:24
+test_question1_case1_points,10
+test_question1_case1_status,passed
+test_question1_case2_points,10
+test_question1_case2_status,passed
+test_question1_case3_points,7.5
+test_question1_case3_status,passed
+test_question1_case4_points,7.5
+test_question1_case4_status,passed
+test_question1_case5_points,0
+test_question1_case5_status,failed
+test_question1_case6_points,0
+test_question1_case6_status,failed
+test_question2_case1_points,10
+test_question2_case1_status,passed
+test_question2_case2_points,10
+test_question2_case2_status,passed
+test_question2_case3_points,7.5
+test_question2_case3_status,passed
+test_question2_case4_points,7.5
+test_question2_case4_status,passed
+test_question2_case5_points,0
+test_question2_case5_status,failed
+test_question2_case6_points,7.5
+test_question2_case6_status,passed
+Total,77.5
+Late Penalty,0
+Total Autograding,77.5
