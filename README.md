@@ -4,26 +4,22 @@ CASE-1 route_pichu.py : NAVIGATION
 
 Approach:
 
-1. Started by reading the code, and used debugger on PyCharm to understand the initial code.
-2. Expanded the provided return statements to better understand the code.
-3. Initially, found that there was no check on visited states. Created check list in moves function for it and added
+
+1. Initially, found that there was no check on visited states. Created check list in moves function for it and added
    it in if statement to avoid those positions while traversing.
-4. The search problem implements DFS as a stack is used.
-5. It can be changed to queue implementation by using fringe.pop(0), and will act as BFS.
-6. At a node, where there are multiple paths avaiable, the algorithm traverses through each path. If a path is blocked,
+1. The search problem implements DFS as a stack is used.
+3. It can be changed to queue implementation by using fringe.pop(0), and will act as BFS.
+4. At a node, where there are multiple paths avaiable, the algorithm traverses through each path. If a path is blocked,
    the stacks pops the elements until the diverging node is reached.
-7. Initial code provided was getting stuck once it traversed through a blocked path as there was no check for traversed states.
+5. Initial code provided was getting stuck once it traversed through a blocked path as there was no check for traversed states.
 
 
 Challenges faced:
 
-1. How to give argument variable like map.txt? 
-Ans - Edit configurations
-
-2. How to stop pichu from traversing to already visited states?
+1. How to stop pichu from traversing to already visited states?
 Ans - A check list with already visited states appended.
 
-3. If a blocked path is traversed, how to manage the string which should return the final path?
+2. If a blocked path is traversed, how to manage the string which should return the final path?
 Ans - This was little time taking. Problem was if a wrong path is taken then how do I remove the wrong strings appended till the
 	  from the diverging node. I associated every new state traversed with a path string. For eg. One up move - "U", 
 	  next up state -  "UU". Because of this, the diverging node has the path till its position. If a blocked path is traversed,
@@ -34,13 +30,11 @@ CASE-2 arrange_pichus.py : Hide-and-Seek
 
 Approach:
 
-1. Started by reading the code, and used debugger on PyCharm to understand the initial code.
-2. Expanded the provided return statements to better understand the code.
-3. Initially, found that there was no check on already kept pichus and code was just looking for '.' and placing pichus.
-4. First, I tried reducing the row and column by 1 to check the working of code, it worked only till 6 pichus, because none of 
+1. Initially, found that there was no check on already kept pichus and code was just looking for '.' and placing pichus.
+2. First, I tried reducing the row and column by 1 to check the working of code, it worked only till 6 pichus, because none of 
    them were being arranged in same row or column. Once k = 7 was given, code failed. 	
-5. Tried to figure out how to enable positions which are behind 'X' and not seen by pichus.
-6. As once I could get all the avaiable positions once pichus are placed, I could place next pichus.
+3. Tried to figure out how to enable positions which are behind 'X' and not seen by pichus.
+4. As once I could get all the avaiable positions once pichus are placed, I could place next pichus.
 
 Challenges:
 
@@ -66,10 +60,5 @@ Ans - In add_pichus function, I used the row and column received from successors
 	  function to get the flag board updated.
 	  
 	  
-
-
-##Citations
-This assignment is submitted by Akshat Arvind under the supervision of Prof. David Crandall and Course AIs - Zoher Kachwala and Team.
-I have discussed the approach of the problem statement with my colleagues and flatmates Rahul Shamdasani and Aniket Kale.
 	  
 	  
